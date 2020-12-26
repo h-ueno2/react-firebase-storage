@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { withRouter } from "react-router";
+import { Box, Button, TextField } from "@material-ui/core";
 import { AuthContext } from "./AuthProvider";
 import * as H from "history";
 
@@ -26,30 +27,32 @@ const Signup = (props: signupProps) => {
   };
 
   return (
-    <div>
+    <Box>
       <h1>Sign up</h1>
       <form onSubmit={handleSubmit}>
-        <label>
-          Email
-          <input
+        <Box m={2} p={1}>
+          <TextField
             name="email"
             type="text"
             placeholder="Email"
             onChange={handleEmailChange}
           />
-        </label>
-        <label>
-          Password
-          <input
+        </Box>
+        <Box m={2} p={1}>
+          <TextField
             name="password"
             type="password"
             placeholder="Password"
             onChange={handlePasswordChange}
           />
-        </label>
-        <button type="submit">Sign up</button>
+        </Box>
+        <Box m={2} p={1}>
+          <Button variant="outlined" type="submit">
+            Sign up
+          </Button>
+        </Box>
       </form>
-    </div>
+    </Box>
   );
 };
 
