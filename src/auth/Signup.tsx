@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { withRouter } from "react-router";
-import { Box, Button, TextField } from "@material-ui/core";
-import { AuthContext } from "./AuthProvider";
 import * as H from "history";
+import { Box, Button, TextField } from "@material-ui/core";
+import { AuthContext } from "src/auth/AuthProvider";
 
 type signupProps = {
   history: H.History;

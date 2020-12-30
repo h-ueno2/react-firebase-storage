@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import PrivateRoute from "./auth/PrivateRoute";
 import { AuthProvider } from "./auth/AuthProvider";
 import Home from "./components/Home";
-import Login from "./auth/Login";
-import SignUp from "./auth/Signup";
+import Login from "src/auth/Login";
+import SignUp from "src/auth/Signup";
 
 const App = () => {
   return (

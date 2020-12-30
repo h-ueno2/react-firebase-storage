@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { app } from "../base";
+import { app } from "src/base";
 import * as H from "history";
 import firebase from "firebase";
 
