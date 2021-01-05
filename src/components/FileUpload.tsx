@@ -21,7 +21,7 @@ const maxFileSize = 1048576;
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: "40em",
+      width: "50em",
       display: "flex",
     },
     paper: {
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     dropzone: {
-      width: "100%",
+      width: "90%",
       height: 200,
       boxSizing: "border-box",
       borderWidth: 2,
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
       borderStyle: "dashed",
       borderRadius: 5,
       verticalAlign: "top",
-      marginRight: "2%",
+      textAlign: "center",
     },
     thumbsContainer: {
       marginTop: 16,
@@ -100,7 +100,7 @@ const FileUpload = () => {
 
   return (
     <Grid container className={classes.root} justify="center">
-      <Grid item xs={6}>
+      <Grid item xs={10}>
         <Paper variant="outlined" elevation={3} className={classes.paper}>
           <Paper className={classes.dropzone} {...getRootProps()}>
             <input {...getInputProps()} />
