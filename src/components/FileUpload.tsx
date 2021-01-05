@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import * as firebase from "firebase/app";
 import { useDropzone } from "react-dropzone";
+import { app } from "src/base";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import {
   Button,
@@ -9,6 +10,7 @@ import {
   GridListTile,
   Paper,
   GridListTileBar,
+  CircularProgress,
 } from "@material-ui/core";
 
 type MyFile = File & {
@@ -60,6 +62,9 @@ const useStyles = makeStyles((theme: Theme) =>
       color: "secondary",
       margin: theme.spacing(3),
     },
+    circular: {
+      textAlign: "center",
+    },
   })
 );
 
@@ -85,8 +90,71 @@ const FileUpload = () => {
     maxSize: maxFileSize,
   });
 
-  const onUpload = () => {};
+  const onUpload = async () => {
+    setUploading(true);
+    setProgress(0);
 
+    function uploadImageAsPromise(file: MyFile) {
+      const fileName = file.name;
+      var storageRef = app
+        .storage()
+        .ref()
+        .child("users/common/" + fileName);
+
+      return new Promise(function (resolve, reject) {
+        const task = storageRef.put(file);
+
+        task.on(
+          firebase.default.storage.TaskEvent.STATE_CHANGED,
+          function progress(snapshot) {},
+          function error(err) {
+            reject(err);
+          },
+          function complete() {
+            task.then((snapshot) => {
+              resolve(snapshot.ref.getDownloadURL());
+            });
+          }
+        );
+      })
+        .then((downloadURL) => {
+          setProgress((oldProgress) => oldProgress + 1);
+          return downloadURL;
+        })
+        .catch(() => {
+          console.log("Error:uploadImageAsPromise");
+        });
+    }
+
+    const result = await Promise.all(
+      files.map((file) => {
+        return uploadImageAsPromise(file);
+      })
+    );
+
+    setUploading(false);
+    setProgress(0);
+    setFiles([]);
+
+    alert("送信されました");
+  };
+
+  if (uploading) {
+    const percent = Math.round((progress / files.length) * 100);
+    return (
+      <Grid container className={classes.root} spacing={3} justify="center">
+        <Grid item xs={6}>
+          <Paper variant="outlined" elevation={3} className={classes.paper}>
+            <CircularProgress
+              className={classes.circular}
+              variant="determinate"
+              value={percent}
+            />
+          </Paper>
+        </Grid>
+      </Grid>
+    );
+  }
   const tileCols = 3;
 
   const thumbs = files.map((file, index) => (
