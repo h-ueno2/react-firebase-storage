@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     dropzone: {
-      width: "90%",
+      width: "100%",
       height: 200,
       boxSizing: "border-box",
       borderWidth: 2,
@@ -102,24 +102,26 @@ const FileUpload = () => {
     <Grid container className={classes.root} justify="center">
       <Grid item xs={10}>
         <Paper variant="outlined" elevation={3} className={classes.paper}>
-          <Paper className={classes.dropzone} {...getRootProps()}>
-            <input {...getInputProps()} />
-            {isDragActive ? <p>ファイルをドロップしてください</p> : <p></p>}
-          </Paper>
-          <Button
-            className={classes.upButton}
-            onClick={onUpload}
-            variant="outlined"
-            color="primary"
-            disabled={isDisabledButton}
-          >
-            Upload
-          </Button>
-          <aside>
-            <GridList cellHeight={200} cols={tileCols}>
-              {thumbs}
-            </GridList>
-          </aside>
+          <div>
+            <Paper className={classes.dropzone} {...getRootProps()}>
+              <input {...getInputProps()} />
+              {isDragActive ? <p>ファイルをドロップしてください</p> : <p></p>}
+            </Paper>
+            <Button
+              className={classes.upButton}
+              onClick={onUpload}
+              variant="outlined"
+              color="primary"
+              disabled={isDisabledButton}
+            >
+              Upload
+            </Button>
+            <aside>
+              <GridList cellHeight={200} cols={tileCols}>
+                {thumbs}
+              </GridList>
+            </aside>
+          </div>
         </Paper>
       </Grid>
     </Grid>
