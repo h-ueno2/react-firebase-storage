@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
-import * as firebase from "firebase/app";
+import * as firebase from "firebase";
+import "firebase/storage";
 import { useDropzone } from "react-dropzone";
 import { app } from "src/base";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
