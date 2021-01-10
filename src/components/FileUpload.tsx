@@ -139,7 +139,8 @@ const FileUpload = () => {
 
     alert("送信されました");
   };
-
+  const tileCols = 3;
+  let tileFeatured: number[] = [];
   if (uploading) {
     const percent = Math.round((progress / files.length) * 100);
     return (
@@ -155,11 +156,26 @@ const FileUpload = () => {
         </Grid>
       </Grid>
     );
+  } else {
+    switch (files.length % tileCols) {
+      case 0:
+        tileFeatured = [];
+        break;
+      case 1:
+        tileFeatured = [0, files.length - 1];
+        break;
+      case 2:
+        tileFeatured = [0];
+        break;
+    }
   }
-  const tileCols = 3;
 
   const thumbs = files.map((file, index) => (
-    <GridListTile key={file.preview} rows={1}>
+    <GridListTile
+      key={file.preview}
+      cols={tileFeatured.indexOf(index) >= 0 ? 2 : 1}
+      rows={1}
+    >
       <img src={file.preview} alt={file.name} />
       <GridListTileBar title={file.name} subtitle={file.size} />
     </GridListTile>
