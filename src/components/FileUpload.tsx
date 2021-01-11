@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import * as firebase from "firebase";
 import "firebase/storage";
 import { useDropzone } from "react-dropzone";
@@ -132,6 +132,8 @@ const FileUpload = () => {
         return uploadImageAsPromise(file);
       })
     );
+
+    console.log(result);
 
     setUploading(false);
     setProgress(0);
